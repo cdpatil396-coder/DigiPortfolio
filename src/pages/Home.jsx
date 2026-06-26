@@ -15,16 +15,13 @@ const Home = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-start overflow-x-hidden bg-[#050816] text-white px-4 pb-28 sm:px-6 lg:pb-40">
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.08),transparent_60%)] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.08),transparent_60%)] pointer-events-none z-0"></div>
 
-      <div className="absolute top-10 left-4 w-48 h-48 md:w-64 md:h-64 bg-cyan-500/10 md:bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute top-10 left-4 w-48 h-48 md:w-64 md:h-64 bg-cyan-500/10 md:bg-cyan-500/20 rounded-full blur-3xl pointer-events-none z-0"></div>
 
-      <div className="absolute bottom-10 right-4 w-48 h-48 md:w-64 md:h-64 bg-blue-500/10 md:bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 right-4 w-48 h-48 md:w-64 md:h-64 bg-blue-500/10 md:bg-blue-500/20 rounded-full blur-3xl pointer-events-none z-0"></div>
 
-      {/* NAVBAR SPACER BLOCK: 
-        This pushes down everything below it to completely clear your fixed navbar.
-        Adjust the heights below if your navbar is unusually tall.
-      */}
+      {/* Structural Navbar Spacer */}
       <div className="w-full h-24 sm:h-28 lg:h-36 block shrink-0"></div>
 
       <div className="relative z-10 max-w-4xl w-full text-center mx-auto flex flex-col items-center mt-4 sm:mt-8">
@@ -108,36 +105,39 @@ const Home = () => {
           </button>
         </motion.div>
 
-        {/* Global Social Icons */}
+        {/* Global Social Icons (UPDATED WITH HIGHER Z-INDEX) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="flex justify-center items-center gap-10 text-3xl pt-24 md:pt-32"
+          className="relative z-30 flex justify-center items-center gap-10 text-3xl pt-24 md:pt-32"
         >
+          {/* GitHub Link */}
           <a
             href="https://github.com/cdpatil396-coder"
             target="_blank"
-            rel="noreferrer"
-            className="text-white hover:text-cyan-400 hover:scale-125 transition-all duration-300"
+            rel="noopener noreferrer"
+            className="cursor-pointer text-white hover:text-cyan-400 hover:scale-125 transition-all duration-300 relative z-30"
           >
             <FaGithub />
           </a>
 
+          {/* LinkedIn Link */}
           <a
             href="https://www.linkedin.com/in/chetan-patil-128a55389"
             target="_blank"
-            rel="noreferrer"
-            className="text-white hover:text-blue-400 hover:scale-125 transition-all duration-300"
+            rel="noopener noreferrer"
+            className="cursor-pointer text-white hover:text-blue-400 hover:scale-125 transition-all duration-300 relative z-30"
           >
             <FaLinkedin />
           </a>
 
+          {/* Instagram Link */}
           <a
-            href="https://instagram.com/yourusername"
+            href="https://instagram.com/your_instagram_username"
             target="_blank"
-            rel="noreferrer"
-            className="text-white hover:text-pink-500 hover:scale-125 transition-all duration-300"
+            rel="noopener noreferrer"
+            className="cursor-pointer text-white hover:text-pink-500 hover:scale-125 transition-all duration-300 relative z-30"
           >
             <FaInstagram />
           </a>
