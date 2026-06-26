@@ -13,8 +13,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    // Changed py-28 to safety margins: pt-36 pb-28 sm:pt-40 lg:pt-48 to cleanly clear your header
-    <section className="relative min-h-screen flex items-center justify-center overflow-x-hidden bg-[#050816] text-white px-4 pt-36 pb-28 sm:px-6 sm:pt-40 lg:pt-48 lg:pb-40">
+    <section className="relative min-h-screen flex flex-col items-center justify-start overflow-x-hidden bg-[#050816] text-white px-4 pb-28 sm:px-6 lg:pb-40">
       {/* Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(34,211,238,0.08),transparent_60%)] pointer-events-none"></div>
 
@@ -22,13 +21,19 @@ const Home = () => {
 
       <div className="absolute bottom-10 right-4 w-48 h-48 md:w-64 md:h-64 bg-blue-500/10 md:bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div className="relative z-10 max-w-4xl w-full text-center mx-auto flex flex-col items-center">
+      {/* NAVBAR SPACER BLOCK: 
+        This pushes down everything below it to completely clear your fixed navbar.
+        Adjust the heights below if your navbar is unusually tall.
+      */}
+      <div className="w-full h-24 sm:h-28 lg:h-36 block shrink-0"></div>
+
+      <div className="relative z-10 max-w-4xl w-full text-center mx-auto flex flex-col items-center mt-4 sm:mt-8">
         {/* Greeting */}
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-xs sm:text-sm md:text-base text-cyan-400 uppercase tracking-[4px] sm:tracking-[6px] mb-6 sm:mb-8"
+          className="text-xs sm:text-sm md:text-base text-cyan-400 uppercase tracking-[4px] sm:tracking-[6px] mb-6 sm:mb-8 block"
         >
           Hello, I'm
         </motion.p>
