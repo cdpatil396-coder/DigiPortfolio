@@ -60,7 +60,7 @@ const About = () => {
           </h1>
 
           <p className="page-subtitle">
-            I Am Full Stack Web Developer passionate about building scalable and user-friendly web applications.
+             Hello, I Am Chetan Full Stack Web Developer passionate about building scalable and user-friendly web applications.
 
 I work primarily with JavaScript, React.js, Node.js, Express.js, and MongoDB. I enjoy developing REST APIs, responsive frontend interfaces, and solving real-world development problems.
 
