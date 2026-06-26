@@ -5,7 +5,7 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const projects = [
   {
     id: "01",
-    title: "Swami Coaching Classes Management System",
+    title: "Coaching Classes Management System",
     description:
       "A full-stack coaching institute management system that allows students to register, log in, and submit admission forms online. Features secure JWT authentication, session management, and a robust admin dashboard to Add, Edit, and Delete student records.",
     tech: ["React.js", "Node.js", "Express.js", "MongoDB Atlas", "JWT", "Tailwind CSS"],
