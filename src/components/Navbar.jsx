@@ -18,7 +18,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center gap-3 group"
           >
-            <FaCode className="text-3xl text-cyan-400 group-hover:rotate-12 transition duration-300" />
+            <FaCode className="text-3xl text-cyan-400 group-hover:rotate-12 transition duration-300"/>
 
             <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
               Portfolio
