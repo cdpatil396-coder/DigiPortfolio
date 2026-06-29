@@ -88,7 +88,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-5 sm:gap-8 w-full sm:w-auto px-6 sm:px-0"
+          className="mb-8 flex w-full flex-col items-center justify-center gap-5 px-6 sm:w-auto sm:flex-row sm:gap-8 sm:px-0 sm:mb-10 lg:mb-12"
         >
           <button
             onClick={() => navigate("/projects")}
@@ -105,12 +105,14 @@ const Home = () => {
           </button>
         </motion.div>
 
+        <div aria-hidden="true" className="h-4 sm:h-6 lg:h-8" />
+
         {/* Global Social Icons (UPDATED WITH HIGHER Z-INDEX) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="relative z-30 flex justify-center items-center gap-10 text-3xl pt-32 md:pt-40"
+          className="relative z-30 flex items-center justify-center gap-10 text-3xl"
         >
           {/* GitHub Link */}
           <a
@@ -143,6 +145,8 @@ const Home = () => {
           </a>
         </motion.div>
 
+        <div aria-hidden="true" className="h-6 sm:h-8 lg:h-10" />
+
         {/* Profile Image */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -151,7 +155,7 @@ const Home = () => {
             duration: 1.2,
             delay: 1,
           }}
-          className="flex justify-center pt-16 md:pt-20"
+          className="flex justify-center"
         >
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-2xl scale-110 md:scale-125"></div>
