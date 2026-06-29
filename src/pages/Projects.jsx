@@ -2,8 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub, FaSearch } from "react-icons/fa";
 
-const projectFilters = ["All", "Full Stack", "Frontend", "Practice"];
-
 const projects = [
   {
     id: "01",
@@ -63,10 +61,9 @@ const statusClasses = {
 };
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredProjects = projects.filter((project) => {
+  const visibleProjects = projects.filter((project) => {
     const query = searchTerm.trim().toLowerCase();
     const haystack = [
       project.title,
@@ -78,17 +75,13 @@ const Projects = () => {
       .join(" ")
       .toLowerCase();
 
-    const matchesSearch = query === "" || haystack.includes(query);
-    const matchesFilter =
-      activeFilter === "All" || project.category === activeFilter;
-
-    return matchesSearch && matchesFilter;
+    return query === "" || haystack.includes(query);
   });
 
   const stats = [
     { label: "Projects listed", value: projects.length },
     { label: "Live demos", value: projects.filter((project) => project.demo).length },
-    { label: "Visible now", value: filteredProjects.length },
+    { label: "Visible now", value: visibleProjects.length },
   ];
 
   return (
@@ -115,34 +108,7 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="mb-8 grid gap-4 xl:grid-cols-[1fr_auto] xl:items-end">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
-              Filter projects
-            </p>
-
-            <div className="flex flex-wrap gap-3">
-              {projectFilters.map((filter) => {
-                const active = activeFilter === filter;
-
-                return (
-                  <button
-                    key={filter}
-                    type="button"
-                    onClick={() => setActiveFilter(filter)}
-                    className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-300 ${
-                      active
-                        ? "bg-cyan-400 text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.18)]"
-                        : "border border-cyan-400/20 bg-white/5 text-slate-300 hover:bg-cyan-400/10 hover:text-cyan-200"
-                    }`}
-                  >
-                    {filter}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
+        <div className="mb-8">
           <label className="flex items-center gap-3 rounded-2xl border border-cyan-500/10 bg-[#0f172a] px-4 py-3 shadow-lg shadow-cyan-500/5">
             <FaSearch className="text-cyan-300" />
             <input
@@ -169,7 +135,7 @@ const Projects = () => {
         </div>
 
         <div className="grid gap-10 xl:grid-cols-3">
-          {filteredProjects.map((project, index) => (
+          {visibleProjects.map((project, index) => (
             <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
@@ -263,7 +229,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {filteredProjects.length === 0 && (
+        {visibleProjects.length === 0 && (
           <div className="about-card mt-10 text-center">
             <h2 className="about-card-title mb-4">No projects found</h2>
             <p className="text-slate-400">

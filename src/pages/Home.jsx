@@ -110,7 +110,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="relative z-30 flex justify-center items-center gap-10 text-3xl pt-24 md:pt-32"
+          className="relative z-30 flex justify-center items-center gap-10 text-3xl pt-32 md:pt-40"
         >
           {/* GitHub Link */}
           <a
@@ -151,7 +151,7 @@ const Home = () => {
             duration: 1.2,
             delay: 1,
           }}
-          className="flex justify-center pt-8 md:pt-10"
+          className="flex justify-center pt-16 md:pt-20"
         >
           <div className="relative">
             <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-2xl scale-110 md:scale-125"></div>
