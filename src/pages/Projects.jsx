@@ -1,51 +1,106 @@
-import React from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaGithub, FaSearch } from "react-icons/fa";
+
+const projectFilters = ["All", "Full Stack", "Frontend", "Practice"];
 
 const projects = [
   {
     id: "01",
     title: "Coaching Classes Management System",
+    category: "Full Stack",
+    status: "Live",
+    preview: "Admissions, authentication and admin workflows",
     description:
-      "A full-stack coaching institute management system that allows students to register, log in, and submit admission forms online. Features secure JWT authentication, session management, and a robust admin dashboard to Add, Edit, and Delete student records.",
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB Atlas", "JWT", "Tailwind CSS"],
+      "A full-stack coaching institute management system that allows students to register, log in, and submit admission forms online. It includes JWT authentication, session handling and an admin dashboard for managing student records.",
+    tech: [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB Atlas",
+      "JWT",
+      "Tailwind CSS",
+    ],
     demo: "https://coaching-class.vercel.app/",
-    github: "#",
+    code: null,
+    gradient:
+      "linear-gradient(135deg, rgba(34, 211, 238, 0.24), rgba(59, 130, 246, 0.12), rgba(15, 23, 42, 0.08))",
   },
   {
     id: "02",
     title: "Portfolio Website",
+    category: "Frontend",
+    status: "Showcase",
+    preview: "Responsive personal brand site",
     description:
-      "Modern portfolio website built using React, Tailwind CSS and Framer Motion with responsive design.",
+      "Modern portfolio website built using React, Tailwind CSS and Framer Motion with responsive layouts, smooth transitions and a more intentional visual system.",
     tech: ["React", "Tailwind CSS", "Framer Motion"],
-    demo: "#",
-    github: "#",
+    demo: "/",
+    code: null,
+    gradient:
+      "linear-gradient(135deg, rgba(59, 130, 246, 0.24), rgba(34, 211, 238, 0.12), rgba(15, 23, 42, 0.08))",
   },
   {
     id: "03",
     title: "Task Manager App",
+    category: "Practice",
+    status: "Prototype",
+    preview: "CRUD tasks and auth flows",
     description:
-      "Task management application with JWT authentication, CRUD operations and REST API integration.",
+      "Task management application with JWT authentication, CRUD operations and REST API integration for productivity workflows.",
     tech: ["MERN", "JWT", "REST API"],
-    demo: "#",
-    github: "#",
+    demo: null,
+    code: null,
+    gradient:
+      "linear-gradient(135deg, rgba(168, 85, 247, 0.24), rgba(34, 211, 238, 0.12), rgba(15, 23, 42, 0.08))",
   },
 ];
 
+const statusClasses = {
+  Live: "border-emerald-400/20 bg-emerald-400/10 text-emerald-200",
+  Showcase: "border-cyan-400/20 bg-cyan-400/10 text-cyan-200",
+  Prototype: "border-amber-400/20 bg-amber-400/10 text-amber-200",
+};
+
 const Projects = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredProjects = projects.filter((project) => {
+    const query = searchTerm.trim().toLowerCase();
+    const haystack = [
+      project.title,
+      project.description,
+      project.status,
+      project.category,
+      project.tech.join(" "),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    const matchesSearch = query === "" || haystack.includes(query);
+    const matchesFilter =
+      activeFilter === "All" || project.category === activeFilter;
+
+    return matchesSearch && matchesFilter;
+  });
+
+  const stats = [
+    { label: "Projects listed", value: projects.length },
+    { label: "Live demos", value: projects.filter((project) => project.demo).length },
+    { label: "Visible now", value: filteredProjects.length },
+  ];
+
   return (
     <section className="page-shell">
       <div className="page-container">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="page-heading"
         >
-          <p className="page-eyebrow">
-            My Recent Work
-          </p>
+          <p className="page-eyebrow">My Recent Work</p>
 
           <h1 className="page-title">
             My{" "}
@@ -55,110 +110,168 @@ const Projects = () => {
           </h1>
 
           <p className="page-subtitle">
-            Explore some of my recent projects showcasing my skills in
-            Full Stack MERN Development, UI/UX Design and modern web
-            technologies.
+            Explore a few projects that show how I approach frontend polish,
+            backend logic and practical full stack problem solving.
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <motion.div
+        <div className="mb-8 grid gap-4 xl:grid-cols-[1fr_auto] xl:items-end">
+          <div>
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.35em] text-cyan-300">
+              Filter projects
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              {projectFilters.map((filter) => {
+                const active = activeFilter === filter;
+
+                return (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setActiveFilter(filter)}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition duration-300 ${
+                      active
+                        ? "bg-cyan-400 text-slate-950 shadow-[0_0_30px_rgba(34,211,238,0.18)]"
+                        : "border border-cyan-400/20 bg-white/5 text-slate-300 hover:bg-cyan-400/10 hover:text-cyan-200"
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <label className="flex items-center gap-3 rounded-2xl border border-cyan-500/10 bg-[#0f172a] px-4 py-3 shadow-lg shadow-cyan-500/5">
+            <FaSearch className="text-cyan-300" />
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Search title, tech or status"
+              className="w-full bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
+            />
+          </label>
+        </div>
+
+        <div className="mb-10 grid gap-4 md:grid-cols-3">
+          {stats.map((stat) => (
+            <div key={stat.label} className="about-card py-6">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-300">
+                {stat.label}
+              </p>
+              <p className="mt-3 text-3xl font-black text-white">
+                {stat.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-10 xl:grid-cols-3">
+          {filteredProjects.map((project, index) => (
+            <motion.article
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.6,
-                delay: index * 0.15,
+                delay: index * 0.12,
               }}
               whileHover={{
                 y: -8,
-                scale: 1.02,
+                scale: 1.01,
               }}
-              className="about-card flex flex-col overflow-hidden"
+              className="about-card flex h-full flex-col overflow-hidden"
             >
-              {/* Project Preview */}
-              <div className="h-64 flex items-center justify-center bg-gradient-to-br from-cyan-900/40 to-blue-900/30 rounded-xl mb-6">
-                <span className="text-8xl font-bold text-white/10">
-                  {project.id}
-                </span>
+              <div
+                className="relative mb-6 overflow-hidden rounded-[1.6rem] border border-white/5 p-5"
+                style={{ backgroundImage: project.gradient }}
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.24),transparent_45%)]" />
+
+                <div className="relative z-10 flex h-52 flex-col justify-between">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[11px] uppercase tracking-[0.4em] text-white/70">
+                        {project.category}
+                      </p>
+                      <h2 className="mt-3 text-4xl font-black text-white/85">
+                        {project.id}
+                      </h2>
+                    </div>
+
+                    <span
+                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${statusClasses[project.status]}`}
+                    >
+                      {project.status}
+                    </span>
+                  </div>
+
+                  <p className="max-w-[18rem] text-sm leading-7 text-slate-200/90">
+                    {project.preview}
+                  </p>
+                </div>
               </div>
 
-              {/* Title */}
-              <h2 className="about-card-title mb-4">
-                {project.title}
-              </h2>
+              <h3 className="about-card-title mb-4">{project.title}</h3>
 
-              {/* Description */}
-              <p className="about-card-text mb-6">
-                {project.description}
-              </p>
+              <p className="about-card-text mb-6">{project.description}</p>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="mb-6 flex flex-wrap gap-2">
                 {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="skill-pill"
-                  >
+                  <span key={tech} className="skill-pill">
                     {tech}
                   </span>
                 ))}
               </div>
 
-              {/* Buttons */}
-              <div className="mt-auto flex gap-3">
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="
-                    flex-1
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    py-3
-                    rounded-xl
-                    bg-cyan-500
-                    hover:bg-cyan-400
-                    text-black
-                    font-bold
-                    transition-all
-                  "
-                >
-                  <FaExternalLinkAlt />
-                  Demo
-                </a>
+              <div className="mt-auto grid gap-3 sm:grid-cols-2">
+                {project.demo ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-4 py-3 font-bold text-slate-950 transition duration-300 hover:bg-cyan-300"
+                  >
+                    <FaExternalLinkAlt />
+                    Live Demo
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 font-semibold text-slate-400">
+                    Demo private
+                  </span>
+                )}
 
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="
-                    flex-1
-                    flex
-                    items-center
-                    justify-center
-                    gap-2
-                    py-3
-                    rounded-xl
-                    border
-                    border-cyan-400
-                    hover:bg-cyan-400
-                    hover:text-black
-                    font-bold
-                    transition-all
-                  "
-                >
-                  <FaGithub />
-                  Code
-                </a>
+                {project.code ? (
+                  <a
+                    href={project.code}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/40 px-4 py-3 font-bold text-cyan-200 transition duration-300 hover:bg-cyan-400 hover:text-slate-950"
+                  >
+                    <FaGithub />
+                    Source Code
+                  </a>
+                ) : (
+                  <span className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-400/20 bg-cyan-400/5 px-4 py-3 font-semibold text-cyan-100/70">
+                    Private source
+                  </span>
+                )}
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
+
+        {filteredProjects.length === 0 && (
+          <div className="about-card mt-10 text-center">
+            <h2 className="about-card-title mb-4">No projects found</h2>
+            <p className="text-slate-400">
+              Try a different search term or switch back to the full project
+              list.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

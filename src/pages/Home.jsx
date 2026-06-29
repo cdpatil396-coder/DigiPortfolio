@@ -7,7 +7,7 @@ import {
   FaInstagram,
 } from "react-icons/fa";
 
-import profileImg from "../assets/profile.jpg";
+import profileImg from "../assets/profile.jpeg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Home = () => {
           transition={{ duration: 0.8 }}
           className="text-xs sm:text-sm md:text-base text-cyan-400 uppercase tracking-[4px] sm:tracking-[6px] mb-6 sm:mb-8 block"
         >
-          Hello, I'm
+          Hello, I&apos;m
         </motion.p>
 
         {/* Name */}

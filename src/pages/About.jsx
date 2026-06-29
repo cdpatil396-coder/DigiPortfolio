@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import {
   FaCode,
   FaDatabase,
-  FaLaptopCode,
-  FaServer,
   FaGraduationCap,
+  FaLaptopCode,
+  FaLightbulb,
+  FaServer,
 } from "react-icons/fa";
 
 const skills = [
@@ -14,7 +15,7 @@ const skills = [
   "Node.js",
   "Express.js",
   "MongoDB",
-  "REST API",
+  "REST APIs",
   "Git & GitHub",
 ];
 
@@ -37,13 +38,35 @@ const highlights = [
     description:
       "I work with MongoDB to store, manage and connect application data with backend services.",
   },
+  {
+    icon: <FaLightbulb />,
+    title: "Problem Solving",
+    description:
+      "I like turning messy requirements into practical, maintainable solutions that are easy to ship.",
+  },
+];
+
+const education = [
+  {
+    title: "Bachelor Graduation",
+    school: "North Maharashtra University",
+    period: "2022 - 2025",
+    description:
+      "Successfully completed graduation with a strong foundation in programming, databases, web development and software engineering.",
+  },
+  {
+    title: "Master of Computer Applications (MCA)",
+    school: "2025 - 2027",
+    period: "First Year Completed • Second Year Pursuing",
+    description:
+      "Currently pursuing MCA while focusing on Full Stack MERN Development, software architecture and modern web technologies.",
+  },
 ];
 
 const About = () => {
   return (
     <section className="page-shell">
       <div className="page-container flex flex-col gap-16 md:gap-24">
-        {/* Heading */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,19 +83,12 @@ const About = () => {
           </h1>
 
           <p className="page-subtitle">
-             Hello, I Am Chetan Full Stack Web Developer passionate about building scalable and user-friendly web applications.
-
-I work primarily with JavaScript, React.js, Node.js, Express.js, and MongoDB. I enjoy developing REST APIs, responsive frontend interfaces, and solving real-world development problems.
-
-During my internship at SyntexHub, I worked on backend development projects including user management REST APIs with authentication and CRUD operations. I have also built projects like a Notes App and personal portfolio website.
-
-Currently, I am improving my DSA, backend architecture, and full-stack development skills while actively building projects and learning industry best practices.
-
-Open to internships, collaborations, and opportunities in web development.
+            I&apos;m a full stack developer who enjoys building practical MERN
+            stack projects with thoughtful UI, clean code and reliable backend
+            logic.
           </p>
         </motion.div>
 
-        {/* Top Cards */}
         <div className="about-top-grid">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -88,7 +104,7 @@ Open to internships, collaborations, and opportunities in web development.
               <h2 className="about-card-title">Who I Am</h2>
             </div>
 
-            <div className="about-card-text">
+            <div className="about-card-text space-y-4">
               <p>
                 My name is Chetan Patil. I enjoy creating web applications that
                 look good, work smoothly and solve real problems. I am learning
@@ -111,19 +127,44 @@ Open to internships, collaborations, and opportunities in web development.
             transition={{ duration: 0.8 }}
             className="about-card"
           >
-            <h2 className="about-card-title mb-6">My Skills</h2>
+            <h2 className="about-card-title mb-4">My Skills</h2>
 
-            <div className="skills-list">
+            <p className="text-slate-400 leading-7">
+              Tools and technologies I use while building small products,
+              backend services and responsive interfaces.
+            </p>
+
+            <div className="skills-list mt-6">
               {skills.map((skill) => (
                 <span key={skill} className="skill-pill">
                   {skill}
                 </span>
               ))}
             </div>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-cyan-500/10 bg-[#13203a] p-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                  Current focus
+                </p>
+                <p className="mt-2 text-sm leading-7 text-slate-300">
+                  MERN architecture, authentication flows and UI polish.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-cyan-500/10 bg-[#13203a] p-4">
+                <p className="text-xs uppercase tracking-[0.3em] text-cyan-300">
+                  Working style
+                </p>
+                <p className="mt-2 text-sm leading-7 text-slate-300">
+                  Reusable components, fast feedback loops and responsive
+                  layouts.
+                </p>
+              </div>
+            </div>
           </motion.div>
         </div>
 
-        {/* Feature Cards */}
         <div className="about-feature-grid">
           {highlights.map((item, index) => (
             <motion.div
@@ -149,7 +190,6 @@ Open to internships, collaborations, and opportunities in web development.
           ))}
         </div>
 
-        {/* Education Section */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -165,43 +205,24 @@ Open to internships, collaborations, and opportunities in web development.
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
-              {/* Graduation */}
-              <div className="bg-[#13203a] rounded-2xl p-6 border border-cyan-500/10">
-                <h3 className="text-xl font-bold text-cyan-400 mb-3">
-                  Bachelor Graduation
-                </h3>
+              {education.map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-2xl border border-cyan-500/10 bg-[#13203a] p-6"
+                >
+                  <h3 className="text-xl font-bold text-cyan-400 mb-3">
+                    {item.title}
+                  </h3>
 
-                <p className="text-white font-medium">
-                  North Maharashtra University
-                </p>
+                  <p className="text-white font-medium">{item.school}</p>
 
-                <p className="text-gray-400 mt-2">2022 - 2025</p>
+                  <p className="text-gray-400 mt-2">{item.period}</p>
 
-                <p className="text-gray-300 mt-4 leading-relaxed">
-                  Successfully completed graduation with a strong foundation in
-                  programming, databases, web development and software
-                  engineering.
-                </p>
-              </div>
-
-              {/* MCA */}
-              <div className="bg-[#13203a] rounded-2xl p-6 border border-cyan-500/10">
-                <h3 className="text-xl font-bold text-cyan-400 mb-3">
-                  Master of Computer Applications (MCA)
-                </h3>
-
-                <p className="text-white font-medium">2025 - 2027</p>
-
-                <p className="text-gray-400 mt-2">
-                  First Year Completed • Second Year Pursuing
-                </p>
-
-                <p className="text-gray-300 mt-4 leading-relaxed">
-                  Currently pursuing MCA while focusing on Full Stack MERN
-                  Development, software architecture and modern web
-                  technologies.
-                </p>
-              </div>
+                  <p className="text-gray-300 mt-4 leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
