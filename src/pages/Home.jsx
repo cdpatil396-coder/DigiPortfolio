@@ -116,7 +116,7 @@ const Home = () => {
         >
           {/* GitHub Link */}
           <a
-            href="https://github.com/cdpatil396-coder"
+            href="https://github.com/cdpatil396-coderr"
             target="_blank"
             rel="noopener noreferrer"
             className="cursor-pointer text-white hover:text-cyan-400 hover:scale-125 transition-all duration-300 relative z-30"
