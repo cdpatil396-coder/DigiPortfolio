@@ -19,7 +19,7 @@ const projects = [
       "JWT",
       "Tailwind CSS",
     ],
-    demo: "https://coaching-class.vercel.app/",
+    demo: "https://coaching-class.vercel.appp/",
     code: null,
     gradient:
       "linear-gradient(135deg, rgba(34, 211, 238, 0.24), rgba(59, 130, 246, 0.12), rgba(15, 23, 42, 0.08))",
